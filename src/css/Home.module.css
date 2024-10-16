@@ -1,0 +1,8 @@
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.cards > * {
+  flex: 1;
+}
