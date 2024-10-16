@@ -2,11 +2,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Root from './routes/Root';
 import Home from './routes/Home';
-import Company from './routes/Company';
-import Tools from './routes/Tools';
 import Training from './routes/Training';
 
 import './App.css';
+import Posts from './routes/Posts';
 
 const router = createBrowserRouter([
   {
@@ -19,15 +18,23 @@ const router = createBrowserRouter([
       },
       {
         path: 'company',
-        element: <Company />,
+        element: <Posts />,
       },
       {
         path: 'tools',
-        element: <Tools />,
+        element: <Posts />,
       },
       {
         path: 'training',
         element: <Training />,
+      },
+      {
+        path: 'organisation-and-management-guidelines',
+        element: <Posts />,
+      },
+      {
+        path: 'how-to-processes',
+        element: <Posts />,
       },
     ],
   },
