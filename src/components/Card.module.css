@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   background-color: var(--neutral-clr-200);
   border: 1px solid var(--neutral-clr-300);
@@ -12,6 +13,7 @@
 .heading {
   margin-block: 8px 4px;
   font-size: 28px;
+  text-align: center;
 }
 
 .info {
