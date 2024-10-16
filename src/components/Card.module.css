@@ -1,0 +1,19 @@
+.card {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--neutral-clr-200);
+  border: 1px solid var(--neutral-clr-300);
+  border-radius: 20px;
+}
+
+.heading {
+  margin-block: 8px 4px;
+  font-size: 28px;
+}
+
+.info {
+  color: var(--neutral-clr-300);
+}
