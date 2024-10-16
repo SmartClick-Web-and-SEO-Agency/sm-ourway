@@ -1,0 +1,19 @@
+.article {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--neutral-clr-300);
+}
+
+.date {
+  font-size: 14px;
+  color: var(--neutral-clr-300);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading {
+  font-size: 24px;
+}
