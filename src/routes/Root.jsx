@@ -7,7 +7,9 @@ const Root = () => {
       <Header title="SmartClick - OurWay" />
 
       <main>
-        <Outlet />
+        <div className="container">
+          <Outlet />
+        </div>
       </main>
     </>
   );
