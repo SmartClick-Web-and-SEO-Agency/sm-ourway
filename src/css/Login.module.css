@@ -1,0 +1,52 @@
+.container {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+}
+
+.logo {
+  max-width: 250px;
+}
+
+.form {
+  margin-top: 40px;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+
+  position: relative;
+}
+
+.input {
+  background-color: var(--neutral-clr-200);
+  border: 1px solid var(--neutral-clr-300);
+  margin: 0;
+}
+
+.input:focus {
+  border: 1px solid var(--neutral-clr-700);
+}
+
+.button {
+  width: max-content;
+  margin-top: 12px;
+  padding: 12px 48px;
+  color: var(--neutral-clr-100);
+  background-color: var(--neutral-clr-800);
+  border-radius: 12px;
+}
+
+.button:hover,
+.button:focus-visible {
+  background-color: var(--neutral-clr-700);
+}
+
+.errorMsg {
+  position: absolute;
+  bottom: -60px;
+  color: red;
+  padding: 4px 12px;
+  border: 1px solid red;
+  border-radius: 12px;
+}

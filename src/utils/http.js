@@ -1,7 +1,4 @@
-export const fetchToken = async (
-  username = 'dimitar-kalapocev',
-  password = 'O8Pp!dP58NN@E$)tc*l%e(4w'
-) => {
+export const fetchToken = async (username, password) => {
   try {
     const res = await fetch(
       'http://localhost:10003/wp-json/jwt-auth/v1/token',
@@ -18,9 +15,12 @@ export const fetchToken = async (
     );
     const resData = await res.json();
 
-    return resData.token;
+    const { token } = resData;
+    localStorage.setItem('token', token);
+    return true;
   } catch (err) {
-    console.log(err);
+    console.error('Login error:', err);
+    return false;
   }
 };
 
