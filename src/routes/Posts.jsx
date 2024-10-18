@@ -3,17 +3,17 @@ import { fetchData, fetchToken } from '../utils/http';
 
 import Article from '../components/Article';
 
-const Posts = () => {
+const Posts = ({ type }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const token = fetchToken();
 
     const resolveData = async () => {
-      setData(await fetchData(token));
+      setData(await fetchData(token, type));
     };
     resolveData();
-  }, []);
+  }, [type]);
 
   return (
     <>
