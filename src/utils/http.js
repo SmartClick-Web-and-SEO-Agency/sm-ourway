@@ -24,32 +24,37 @@ export const fetchToken = async (username, password) => {
   }
 };
 
-export const fetchData = async (token, type) => {
-  const readyToken = await token;
+export const fetchData = async (type) => {
+  try {
+    const token = localStorage.getItem('token');
 
-  const res = await fetch(
-    `http://localhost:10003/wp-json/wp/v2/${type}?per_page=100`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${readyToken}`,
-      },
-    }
-  );
-  const resData = await res.json();
+    const res = await fetch(
+      `http://localhost:10003/wp-json/wp/v2/${type}?per_page=100`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-  return resData;
+    const resData = await res.json();
+
+    return resData;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-export const fetchPost = async (token, type, id) => {
-  const readyToken = await token;
+export const fetchPost = async (type, id) => {
+  const token = await localStorage.getItem('token');
 
   const res = await fetch(
     `http://localhost:10003/wp-json/wp/v2/${type}?include=${id}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${readyToken}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
