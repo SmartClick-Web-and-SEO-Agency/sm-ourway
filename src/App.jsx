@@ -3,11 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/Root';
 import Home from './routes/Home';
 import Training from './routes/Training';
-
-import './App.css';
+import ProtectedRoute from './components/ProtectedRoute';
 import Posts from './routes/Posts';
 import Post from './routes/Post';
 import Login from './routes/Login';
+
+import './App.css';
 
 const router = createBrowserRouter([
   {
@@ -16,31 +17,59 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'company',
-        element: <Posts type="company" />,
+        element: (
+          <ProtectedRoute>
+            <Posts type="company" />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'tools',
-        element: <Posts type="tools" />,
+        element: (
+          <ProtectedRoute>
+            <Posts type="tools" />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'training',
-        element: <Training />,
+        element: (
+          <ProtectedRoute>
+            <Training />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'organisation-and-management-guidelines',
-        element: <Posts type="organisation" />,
+        element: (
+          <ProtectedRoute>
+            <Posts type="organisation" />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'how-to-processes',
-        element: <Posts type="howto" />,
+        element: (
+          <ProtectedRoute>
+            <Posts type="howto" />
+          </ProtectedRoute>
+        ),
       },
       {
         path: ':id',
-        element: <Post id={1126} />,
+        element: (
+          <ProtectedRoute>
+            <Post id={1126} />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
