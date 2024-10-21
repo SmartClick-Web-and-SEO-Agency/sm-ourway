@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
+import logoutIcon from '../assets/logout-icon.svg';
+
 const Root = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('SmartClick - OurWay');
 
   const location = useLocation();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   useEffect(() => {
     if (location.pathname !== '/') {
@@ -28,6 +36,10 @@ const Root = () => {
           <Outlet />
         </div>
       </main>
+
+      <button onClick={handleLogout}>
+        <img className="logout-icon" src={logoutIcon} alt="Logout Icon" />
+      </button>
     </>
   );
 };

@@ -210,3 +210,10 @@ h6,
   font-size: var(--heading-fs-6);
   line-height: 1.2;
 }
+
+.logout-icon {
+  cursor: pointer;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
