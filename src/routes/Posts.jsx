@@ -1,23 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '../utils/http';
 
 import Article from '../components/Article';
 
 const Posts = ({ type }) => {
-  const [data, setData] = useState([]);
+  const { isPending, isError, data } = useQuery({
+    queryKey: ['articles', type],
+    queryFn: () => fetchData(type),
+  });
 
-  useEffect(() => {
-    const resolveData = async () => {
-      setData(await fetchData(type));
-    };
-    resolveData();
-  }, [type]);
+  if (isError) return <p style={{ textAlign: 'center' }}>An error occured.</p>;
+  if (isPending)
+    return <p style={{ textAlign: 'center' }}>Loading... Be patient :)</p>;
 
   return (
     <>
-      {data.length > 0
-        ? data.map((item) => <Article item={item} key={item.id} />)
-        : 'No posts here for you. :)'}
+      {!isPending &&
+        !isError &&
+        data
+          .filter(
+            (item) =>
+              !item.content.rendered.includes(
+                'Sorry, but you do not have permission to view this content.'
+              )
+          )
+          .map((item) => <Article item={item} key={item.id} />)}
     </>
   );
 };

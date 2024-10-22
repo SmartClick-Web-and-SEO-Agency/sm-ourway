@@ -1,25 +1,23 @@
-import { useEffect, useState } from 'react';
-import { fetchPost } from '../utils/http';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { fetchPost } from '../utils/http';
 
 const Post = () => {
   const location = useLocation();
-  const [data, setData] = useState([]);
+  const match = location.pathname.match(
+    /\/([a-zA-Z-]+)\/[a-zA-Z0-9-]+-(\d{3,4})$/
+  );
+  const categoryMatch = match ? match[1] : null;
+  const id = match ? match[2] : null;
 
-  useEffect(() => {
-    const match = location.pathname.match(
-      /\/([a-zA-Z-]+)\/[a-zA-Z0-9-]+-(\d{3,4})$/
-    );
-    const categoryMatch = match ? match[1] : null;
-    const id = match ? match[2] : null;
+  const { isPending, isError, data } = useQuery({
+    queryKey: ['articles', id],
+    queryFn: () => fetchPost(categoryMatch, id),
+  });
 
-    const resolveData = async () => {
-      if (id) {
-        setData(await fetchPost(categoryMatch, id));
-      }
-    };
-    resolveData();
-  }, [location]);
+  if (isError) return <p style={{ textAlign: 'center' }}>An error occured.</p>;
+  if (isPending)
+    return <p style={{ textAlign: 'center' }}>Loading... Be patient :)</p>;
 
   return (
     <div style={{ maxWidth: '750px' }}>
