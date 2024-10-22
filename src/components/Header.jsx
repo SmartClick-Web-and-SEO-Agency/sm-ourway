@@ -39,10 +39,16 @@ const Header = () => {
             <Link to="/">Home</Link>
             {pathnames.map((value, index) => {
               const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+              const isLast = index === pathnames.length - 1;
+
               return (
                 <span key={to}>
                   {' > '}
-                  <Link to={to}>{formatBreadcrumb(value)}</Link>
+                  {isLast ? (
+                    <span>{formatBreadcrumb(value)}</span>
+                  ) : (
+                    <Link to={to}>{formatBreadcrumb(value)}</Link>
+                  )}
                 </span>
               );
             })}
