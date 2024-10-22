@@ -10,9 +10,16 @@ const Post = () => {
   const categoryMatch = match ? match[1] : null;
   const id = match ? match[2] : null;
 
+  const categoryMap = {
+    'how-to-processes': 'howto',
+    'organisation-and-management-guidelines': 'organisation',
+  };
+
+  const cat = categoryMap[categoryMatch] || categoryMatch;
+
   const { isPending, isError, data } = useQuery({
     queryKey: ['articles', id],
-    queryFn: () => fetchPost(categoryMatch, id),
+    queryFn: () => fetchPost(cat, id),
   });
 
   if (isError) return <p style={{ textAlign: 'center' }}>An error occured.</p>;
