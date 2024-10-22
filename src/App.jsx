@@ -25,51 +25,100 @@ const router = createBrowserRouter([
       },
       {
         path: 'company',
-        element: (
-          <ProtectedRoute>
-            <Posts type="company" />
-          </ProtectedRoute>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <ProtectedRoute>
+                <Posts type="company" />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: ':id',
+            element: (
+              <ProtectedRoute>
+                <Post />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
       {
         path: 'tools',
-        element: (
-          <ProtectedRoute>
-            <Posts type="tools" />
-          </ProtectedRoute>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <ProtectedRoute>
+                <Posts type="tools" />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: ':id',
+            element: (
+              <ProtectedRoute>
+                <Post />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
       {
         path: 'training',
-        element: (
-          <ProtectedRoute>
-            <Training />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: 'organisation-and-management-guidelines',
-        element: (
-          <ProtectedRoute>
-            <Posts type="organisation" />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: 'how-to-processes',
-        element: (
-          <ProtectedRoute>
-            <Posts type="howto" />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: ':id',
-        element: (
-          <ProtectedRoute>
-            <Post id={1126} />
-          </ProtectedRoute>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <ProtectedRoute>
+                <Training />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: 'organisation-and-management-guidelines',
+            children: [
+              {
+                index: true,
+                element: (
+                  <ProtectedRoute>
+                    <Posts type="organisation" />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: ':id',
+                element: (
+                  <ProtectedRoute>
+                    <Post />
+                  </ProtectedRoute>
+                ),
+              },
+            ],
+          },
+          {
+            path: 'how-to-processes',
+            children: [
+              {
+                index: true,
+                element: (
+                  <ProtectedRoute>
+                    <Posts type="howto" />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: ':id',
+                element: (
+                  <ProtectedRoute>
+                    <Post />
+                  </ProtectedRoute>
+                ),
+              },
+            ],
+          },
+        ],
       },
     ],
   },

@@ -13,13 +13,13 @@ const Training = () => {
           title="Organisation & Management Guidelines"
           postsNumber="12"
           icon={manageIcon}
-          href="/organisation-and-management-guidelines"
+          href="organisation-and-management-guidelines"
         />
         <Card
           title="How-to Processes"
           postsNumber="25"
           icon={presentationIcon}
-          href="/how-to-processes"
+          href="how-to-processes"
         />
       </div>
     </>

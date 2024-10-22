@@ -17,7 +17,7 @@ const Article = ({ item }) => {
     <article className={classes.article}>
       <p className={classes.date}>{formattedDate}</p>
       <div className={classes.container}>
-        <Link to={`/${item.slug}`} className={classes.heading}>
+        <Link to={`${item.slug}-${item.id}`} className={classes.heading}>
           {item.title?.rendered}
         </Link>
         <img className={classes.icon} src={linkIcon} alt="Link icon" />
