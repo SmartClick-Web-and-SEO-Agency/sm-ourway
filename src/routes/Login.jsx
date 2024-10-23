@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { fetchToken } from '../utils/http';
 
 import smartclickLogo from '../assets/smartclick-logo.svg';
@@ -7,8 +6,6 @@ import smartclickLogo from '../assets/smartclick-logo.svg';
 import classes from '../css/Login.module.css';
 
 const Login = () => {
-  const navigate = useNavigate();
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -18,7 +15,7 @@ const Login = () => {
 
     const res = await fetchToken(username, password);
 
-    if (res) navigate('/');
+    if (res) window.location.href = '/';
     else setError(true);
   };
 

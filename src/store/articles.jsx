@@ -15,22 +15,27 @@ export const ArticlesContext = createContext({
 
 export default function ArticlesContextProvider({ children }) {
   const [state, setState] = useState(initialState);
+  let token = localStorage.getItem('token');
 
   const { data: companyData } = useQuery({
     queryKey: ['articles', 'company'],
     queryFn: () => fetchData('company'),
+    enabled: !!token,
   });
   const { data: toolsData } = useQuery({
     queryKey: ['articles', 'tools'],
     queryFn: () => fetchData('tools'),
+    enabled: !!token,
   });
   const { data: howtoData } = useQuery({
     queryKey: ['articles', 'howto'],
     queryFn: () => fetchData('howto'),
+    enabled: !!token,
   });
   const { data: organisationData } = useQuery({
     queryKey: ['articles', 'organisation'],
     queryFn: () => fetchData('organisation'),
+    enabled: !!token,
   });
 
   useEffect(() => {
