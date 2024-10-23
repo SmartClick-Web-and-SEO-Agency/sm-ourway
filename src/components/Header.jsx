@@ -1,12 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
-import classes from './Header.module.css';
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+import classes from './Header.module.css';
 
 const Header = () => {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   const [title, setTitle] = useState('SmartClick - OurWay');
+  const [hideInput, setHideInput] = useState(false);
 
   useEffect(() => {
     if (location.pathname !== '/') {
@@ -21,8 +23,12 @@ const Header = () => {
         .join(' ');
 
       setTitle(capitalized);
+
+      const numberPattern = /\d{3,4}$/;
+      setHideInput(numberPattern.test(pathSegments[pathSegments.length - 1]));
     } else {
       setTitle('SmartClick - OurWay');
+      setHideInput(false);
     }
   }, [location]);
 
@@ -35,9 +41,7 @@ const Header = () => {
       .join(' ');
   };
 
-  const removeTrailingNumbers = (str) => {
-    return str.replace(/\d{3,4}$/, '');
-  };
+  const removeTrailingNumbers = (str) => str.replace(/\d{3,4}$/, '');
 
   return (
     <header className={classes.header}>
@@ -63,11 +67,13 @@ const Header = () => {
           </p>
         </nav>
         <h1 className={classes.heading}>{title}</h1>
-        <input
-          className={classes.input}
-          type="text"
-          placeholder="Search OurWay..."
-        />
+        {!hideInput && (
+          <input
+            className={classes.input}
+            type="text"
+            placeholder="Search OurWay..."
+          />
+        )}
       </div>
     </header>
   );
