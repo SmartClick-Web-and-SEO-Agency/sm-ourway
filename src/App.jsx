@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import ArticlesContextProvider from './store/articles';
 import Root from './routes/Root';
 import Home from './routes/Home';
 import Training from './routes/Training';
@@ -134,7 +135,9 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />;
+      <ArticlesContextProvider>
+        <RouterProvider router={router} />;
+      </ArticlesContextProvider>
     </QueryClientProvider>
   );
 };
