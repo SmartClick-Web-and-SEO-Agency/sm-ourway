@@ -11,7 +11,9 @@ const Header = () => {
   useEffect(() => {
     if (location.pathname !== '/') {
       const pathSegments = location.pathname.split('/').filter((x) => x);
-      const lastSegment = pathSegments[pathSegments.length - 1];
+      let lastSegment = pathSegments[pathSegments.length - 1];
+
+      lastSegment = removeTrailingNumbers(lastSegment);
 
       const capitalized = lastSegment
         .split('-')
@@ -25,10 +27,16 @@ const Header = () => {
   }, [location]);
 
   const formatBreadcrumb = (str) => {
+    str = removeTrailingNumbers(str);
+
     return str
       .split('-')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
+  };
+
+  const removeTrailingNumbers = (str) => {
+    return str.replace(/\d{3,4}$/, '');
   };
 
   return (
