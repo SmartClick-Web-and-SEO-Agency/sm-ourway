@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPost } from '../utils/http';
 
 import classes from '../css/Post.module.css';
+import TableOfContents from '../components/TableOfContents';
 
 const Post = () => {
   const location = useLocation();
@@ -29,10 +30,13 @@ const Post = () => {
     return <p style={{ textAlign: 'center' }}>Loading... Be patient :)</p>;
 
   return (
-    <div className={classes.singlePost}>
+    <div className={classes.postContainer}>
       <div
+        className={classes.singlePost}
         dangerouslySetInnerHTML={{ __html: data[0]?.content.rendered }}
       ></div>
+
+      <TableOfContents />
     </div>
   );
 };
