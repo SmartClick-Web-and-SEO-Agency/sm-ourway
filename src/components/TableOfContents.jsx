@@ -23,28 +23,30 @@ const TableOfContents = () => {
     }
   };
 
-  return (
-    <nav className={classes.aside}>
-      <h4 className={classes.title}>Table of Contents</h4>
-      <ul className={classes.list}>
-        {headings.map((heading) => (
-          <li
-            key={heading.id}
-            style={{ marginLeft: heading.level === 'h3' ? '12px' : '0px' }}
-          >
-            <a
-              href={`#${heading.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                handleClick(heading.id);
-              }}
+  if (headings.length > 0) {
+    return (
+      <nav className={classes.aside}>
+        <h4 className={classes.title}>Table of Contents</h4>
+        <ul className={classes.list}>
+          {headings.map((heading) => (
+            <li
+              key={heading.id}
+              style={{ marginLeft: heading.level === 'h3' ? '12px' : '0px' }}
             >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
+              <a
+                href={`#${heading.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClick(heading.id);
+                }}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  }
 };
 export default TableOfContents;
