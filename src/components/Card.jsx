@@ -7,7 +7,9 @@ const Card = ({ title, postsNumber, icon, href }) => {
     <Link to={href} className={classes.card}>
       <img className={classes.icon} src={icon} alt={title} />
       <h2 className={classes.heading}>{title}</h2>
-      <p className={classes.info}>{postsNumber} Articles</p>
+      <p className={classes.info}>
+        {postsNumber} {postsNumber === 1 ? 'Article' : 'Articles'}
+      </p>
     </Link>
   );
 };

@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { ArticlesContext } from '../store/articles';
+
 import Card from '../components/Card';
 
 import companyIcon from '../assets/company-icon.svg';
@@ -7,19 +10,26 @@ import trainingIcon from '../assets/training-icon.svg';
 import classes from '../css/Home.module.css';
 
 const Home = () => {
+  const { company, tools, howto, organisation } = useContext(ArticlesContext);
+
   return (
     <>
       <div className={classes.cards}>
         <Card
           title="Company"
-          postsNumber="12"
+          postsNumber={company.length}
           icon={companyIcon}
           href="company"
         />
-        <Card title="Tools" postsNumber="25" icon={toolsIcon} href="tools" />
+        <Card
+          title="Tools"
+          postsNumber={tools.length}
+          icon={toolsIcon}
+          href="tools"
+        />
         <Card
           title="Training"
-          postsNumber="38"
+          postsNumber={howto.length + organisation.length}
           icon={trainingIcon}
           href="training"
         />
