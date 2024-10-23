@@ -2,6 +2,8 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPost } from '../utils/http';
 
+import classes from '../css/Post.module.css';
+
 const Post = () => {
   const location = useLocation();
   const match = location.pathname.match(
@@ -27,7 +29,7 @@ const Post = () => {
     return <p style={{ textAlign: 'center' }}>Loading... Be patient :)</p>;
 
   return (
-    <div style={{ maxWidth: '750px' }}>
+    <div className={classes.singlePost}>
       <div
         dangerouslySetInnerHTML={{ __html: data[0]?.content.rendered }}
       ></div>
