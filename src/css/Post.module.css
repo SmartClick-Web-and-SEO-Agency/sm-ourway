@@ -1,7 +1,7 @@
 .postContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: start;
+  flex-direction: column-reverse;
+  gap: 40px;
 }
 
 .singlePost {
@@ -108,4 +108,12 @@
 
 .singlePost a {
   text-decoration: underline;
+}
+
+@media (min-width: 992px) {
+  .postContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+  }
 }

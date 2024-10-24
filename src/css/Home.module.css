@@ -1,8 +1,15 @@
 .cards {
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
 .cards > * {
   flex: 1;
+}
+
+@media (min-width: 992px) {
+  .cards {
+    flex-direction: row;
+  }
 }
