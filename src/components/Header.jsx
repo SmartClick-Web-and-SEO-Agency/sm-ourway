@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import classes from './Header.module.css';
 
-const Header = () => {
+const Header = ({ handleSearch }) => {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x) => x);
 
@@ -72,6 +72,7 @@ const Header = () => {
             className={classes.input}
             type="text"
             placeholder="Search OurWay..."
+            onChange={(e) => handleSearch(e.target.value)}
           />
         )}
       </div>

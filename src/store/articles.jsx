@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '../utils/http';
 
 const initialState = {
+  all: [],
   company: [],
   tools: [],
   howto: [],
@@ -65,6 +66,7 @@ export default function ArticlesContextProvider({ children }) {
               'Sorry, but you do not have permission to view this content.'
             )
         ),
+        all: [...companyData, ...toolsData, ...howtoData, ...organisationData],
       });
     }
   }, [companyData, toolsData, howtoData, organisationData]);

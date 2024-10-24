@@ -1,9 +1,16 @@
+import { useContext, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { ArticlesContext } from '../store/articles';
+
 import Header from '../components/Header';
 
 import logoutIcon from '../assets/logout-icon.svg';
+import Article from '../components/Article';
 
 const Root = () => {
+  const { all } = useContext(ArticlesContext);
+  const [searchTerm, setSearchTerm] = useState('');
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,11 +20,21 @@ const Root = () => {
 
   return (
     <>
-      <Header />
+      <Header handleSearch={setSearchTerm} />
 
       <main>
         <div className="container">
-          <Outlet />
+          {!searchTerm && <Outlet />}
+          {searchTerm && <p>Searched for {searchTerm}</p>}
+          {searchTerm &&
+            all &&
+            all
+              .filter((item) =>
+                item.title.rendered
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              )
+              .map((item) => <Article item={item} key={item.id} />)}
         </div>
       </main>
 
