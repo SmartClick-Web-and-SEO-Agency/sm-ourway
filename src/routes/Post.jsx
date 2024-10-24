@@ -27,9 +27,6 @@ const Post = () => {
 
   useEffect(() => {
     if (data && id) {
-      console.log(data);
-      console.log(id);
-
       let p = data.find((item) => item.id === +id);
       setPost(p);
     }
@@ -38,15 +35,16 @@ const Post = () => {
   return (
     <div className={classes.postContainer}>
       {post ? (
-        <div
-          className={classes.singlePost}
-          dangerouslySetInnerHTML={{ __html: post.content?.rendered }}
-        ></div>
+        <>
+          <div
+            className={classes.singlePost}
+            dangerouslySetInnerHTML={{ __html: post.content?.rendered }}
+          ></div>
+          <TableOfContents />
+        </>
       ) : (
         <p>Loading post...</p>
       )}
-
-      <TableOfContents />
     </div>
   );
 };
