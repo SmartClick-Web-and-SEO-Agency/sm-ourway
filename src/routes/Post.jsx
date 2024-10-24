@@ -1,11 +1,14 @@
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchPost } from '../utils/http';
+import { ArticlesContext } from '../store/articles';
 
-import classes from '../css/Post.module.css';
 import TableOfContents from '../components/TableOfContents';
 
+import classes from '../css/Post.module.css';
+
 const Post = () => {
+  const [post, setPost] = useState();
+
   const location = useLocation();
   const match = location.pathname.match(
     /\/([a-zA-Z-]+)\/[a-zA-Z0-9-]+-(\d{3,4})$/
@@ -20,21 +23,28 @@ const Post = () => {
 
   const cat = categoryMap[categoryMatch] || categoryMatch;
 
-  const { isPending, isError, data } = useQuery({
-    queryKey: ['articles', id],
-    queryFn: () => fetchPost(cat, id),
-  });
+  const { [cat]: data } = useContext(ArticlesContext);
 
-  if (isError) return <p style={{ textAlign: 'center' }}>An error occured.</p>;
-  if (isPending)
-    return <p style={{ textAlign: 'center' }}>Loading... Be patient :)</p>;
+  useEffect(() => {
+    if (data && id) {
+      console.log(data);
+      console.log(id);
+
+      let p = data.find((item) => item.id === +id);
+      setPost(p);
+    }
+  }, [data, id]);
 
   return (
     <div className={classes.postContainer}>
-      <div
-        className={classes.singlePost}
-        dangerouslySetInnerHTML={{ __html: data[0]?.content.rendered }}
-      ></div>
+      {post ? (
+        <div
+          className={classes.singlePost}
+          dangerouslySetInnerHTML={{ __html: post.content?.rendered }}
+        ></div>
+      ) : (
+        <p>Loading post...</p>
+      )}
 
       <TableOfContents />
     </div>

@@ -50,20 +50,3 @@ export const fetchData = async (type) => {
     console.error(err);
   }
 };
-
-export const fetchPost = async (type, id) => {
-  const token = localStorage.getItem('token');
-
-  const res = await fetch(
-    `https://ourway.smartclick.agency/wp-json/wp/v2/${type}?include=${id}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  const resData = await res.json();
-
-  return resData;
-};
