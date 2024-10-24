@@ -34,7 +34,7 @@ export const fetchData = async (type) => {
     const token = localStorage.getItem('token');
 
     const res = await fetch(
-      `https://ourway.smartclick.agency/wp-json/wp/v2/${type}?per_page=100`,
+      `https://ourway.smartclick.agency/wp-json/wp/v2/${type}?_fields=title,id,slug,date,content&per_page=100`,
       {
         method: 'GET',
         headers: {
