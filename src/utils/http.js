@@ -16,8 +16,13 @@ export const fetchToken = async (username, password) => {
     const resData = await res.json();
 
     const { token } = resData;
-    localStorage.setItem('token', token);
-    return true;
+
+    if (token) {
+      localStorage.setItem('token', token);
+      return true;
+    } else {
+      return false;
+    }
   } catch (err) {
     console.error('Login error:', err);
     return false;
