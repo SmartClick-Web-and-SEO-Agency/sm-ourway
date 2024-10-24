@@ -21,8 +21,8 @@ const Root = () => {
         </div>
       </main>
 
-      <button onClick={handleLogout}>
-        <img className="logout-icon" src={logoutIcon} alt="Logout Icon" />
+      <button className="logout-icon" onClick={handleLogout}>
+        <img src={logoutIcon} alt="Logout Icon" />
       </button>
     </>
   );
