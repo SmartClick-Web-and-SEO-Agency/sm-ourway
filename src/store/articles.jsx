@@ -41,32 +41,45 @@ export default function ArticlesContextProvider({ children }) {
 
   useEffect(() => {
     if (companyData && toolsData && howtoData && organisationData) {
+      const filteredCompany = companyData.filter(
+        (item) =>
+          !item.content.rendered.includes(
+            'Sorry, but you do not have permission to view this content.'
+          )
+      );
+
+      const filteredTools = toolsData.filter(
+        (item) =>
+          !item.content.rendered.includes(
+            'Sorry, but you do not have permission to view this content.'
+          )
+      );
+
+      const filteredHowto = howtoData.filter(
+        (item) =>
+          !item.content.rendered.includes(
+            'Sorry, but you do not have permission to view this content.'
+          )
+      );
+
+      const filteredOrganisation = organisationData.filter(
+        (item) =>
+          !item.content.rendered.includes(
+            'Sorry, but you do not have permission to view this content.'
+          )
+      );
+
       setState({
-        company: companyData.filter(
-          (item) =>
-            !item.content.rendered.includes(
-              'Sorry, but you do not have permission to view this content.'
-            )
-        ),
-        tools: toolsData.filter(
-          (item) =>
-            !item.content.rendered.includes(
-              'Sorry, but you do not have permission to view this content.'
-            )
-        ),
-        howto: howtoData.filter(
-          (item) =>
-            !item.content.rendered.includes(
-              'Sorry, but you do not have permission to view this content.'
-            )
-        ),
-        organisation: organisationData.filter(
-          (item) =>
-            !item.content.rendered.includes(
-              'Sorry, but you do not have permission to view this content.'
-            )
-        ),
-        all: [...companyData, ...toolsData, ...howtoData, ...organisationData],
+        company: filteredCompany,
+        tools: filteredTools,
+        howto: filteredHowto,
+        organisation: filteredOrganisation,
+        all: [
+          ...filteredCompany,
+          ...filteredTools,
+          ...filteredHowto,
+          ...filteredOrganisation,
+        ],
       });
     }
   }, [companyData, toolsData, howtoData, organisationData]);

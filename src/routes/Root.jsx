@@ -34,7 +34,13 @@ const Root = () => {
                   .toLowerCase()
                   .includes(searchTerm.toLowerCase())
               )
-              .map((item) => <Article item={item} key={item.id} />)}
+              .map((item) => (
+                <Article
+                  item={item}
+                  key={item.id}
+                  handleClick={() => setSearchTerm('')}
+                />
+              ))}
         </div>
       </main>
 

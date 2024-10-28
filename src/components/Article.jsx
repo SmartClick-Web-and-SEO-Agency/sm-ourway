@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import linkIcon from '../assets/link-icon.svg';
 import classes from './Article.module.css';
 
-const Article = ({ item }) => {
+const Article = ({ item, handleClick }) => {
   const date = new Date(item.date);
   const formattedDate = `
                 ${
@@ -13,11 +13,18 @@ const Article = ({ item }) => {
   }.${date.getFullYear()}
                 `;
 
+  if (item.type === 'howto') item.type = 'training/how-to-processes';
+  if (item.type === 'organisation')
+    item.type = 'training/organisation-and-management-guidelines';
+
   return (
-    <article className={classes.article}>
+    <article className={classes.article} onClick={handleClick}>
       <p className={classes.date}>{formattedDate}</p>
       <div className={classes.container}>
-        <Link to={`${item.slug}-${item.id}`} className={classes.heading}>
+        <Link
+          to={`/${item.type}/${item.slug}-${item.id}`}
+          className={classes.heading}
+        >
           {item.title?.rendered}
         </Link>
         <img className={classes.icon} src={linkIcon} alt="Link icon" />
