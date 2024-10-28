@@ -110,6 +110,12 @@
   text-decoration: underline;
 }
 
+.singlePost code {
+  display: inline-block;
+  width: 100%;
+  overflow-x: auto;
+}
+
 @media (min-width: 992px) {
   .postContainer {
     flex-direction: row;
