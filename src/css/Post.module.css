@@ -5,7 +5,7 @@
 }
 
 .singlePost {
-  max-width: 600px;
+  max-width: 680px;
 }
 
 .singlePost > *:first-child {
@@ -116,7 +116,7 @@
   overflow-x: auto;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1040px) {
   .postContainer {
     flex-direction: row;
     justify-content: space-between;
