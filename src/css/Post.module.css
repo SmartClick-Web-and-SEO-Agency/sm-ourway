@@ -1,15 +1,18 @@
 .postContainer {
+  max-width: 900px;
+  margin-inline: auto;
+
   display: flex;
   flex-direction: column-reverse;
   gap: 40px;
 }
 
-.singlePost {
-  max-width: 680px;
-}
-
 .singlePost > *:first-child {
   margin-top: 0;
+}
+
+.singlePost > * {
+  width: auto;
 }
 
 .singlePost h1,
@@ -106,20 +109,17 @@
   height: auto;
 }
 
+.singlePost video {
+  width: 100%;
+}
+
 .singlePost a {
   text-decoration: underline;
+  word-wrap: break-word;
 }
 
 .singlePost code {
   display: inline-block;
   width: 100%;
   overflow-x: auto;
-}
-
-@media (min-width: 1040px) {
-  .postContainer {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: start;
-  }
 }

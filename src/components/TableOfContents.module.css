@@ -3,7 +3,7 @@
   border-radius: 12px;
   background-color: var(--neutral-clr-100);
   box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
-  width: 262px;
+  width: max-content;
 }
 
 .title {
@@ -22,11 +22,4 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-}
-
-@media (min-width: 1040px) {
-  .aside {
-    position: sticky;
-    top: 40px;
-  }
 }
