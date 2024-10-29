@@ -24,9 +24,8 @@ const Article = ({ item, handleClick }) => {
         <Link
           to={`/${item.type}/${item.slug}-${item.id}`}
           className={classes.heading}
-        >
-          {item.title?.rendered}
-        </Link>
+          dangerouslySetInnerHTML={{ __html: item.title?.rendered }}
+        ></Link>
         <img className={classes.icon} src={linkIcon} alt="Link icon" />
       </div>
     </article>
