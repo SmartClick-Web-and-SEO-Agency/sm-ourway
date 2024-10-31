@@ -18,7 +18,9 @@ export const fetchToken = async (username, password) => {
     const { token } = resData;
 
     if (token) {
+      const expirationTime = Date.now() + 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
       localStorage.setItem('token', token);
+      localStorage.setItem('tokenExpiry', expirationTime);
       return true;
     } else {
       return false;
@@ -29,9 +31,22 @@ export const fetchToken = async (username, password) => {
   }
 };
 
+export const getToken = () => {
+  const token = localStorage.getItem('token');
+  const tokenExpiry = localStorage.getItem('tokenExpiry');
+
+  if (token && tokenExpiry && Date.now() < tokenExpiry) {
+    return token;
+  } else {
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenExpiry');
+    return null;
+  }
+};
+
 export const fetchData = async (type) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = getToken();
 
     const res = await fetch(
       `https://dash-ourway.smartclick.agency/wp-json/wp/v2/${type}?_fields=title,id,slug,date,content,type&per_page=100`,
