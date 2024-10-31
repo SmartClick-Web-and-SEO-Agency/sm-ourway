@@ -1,7 +1,7 @@
 export const fetchToken = async (username, password) => {
   try {
     const res = await fetch(
-      'https://ourway.smartclick.agency/wp-json/jwt-auth/v1/token',
+      'https://dash-ourway.smartclick.agency/wp-json/jwt-auth/v1/token',
       {
         method: 'POST',
         headers: {
@@ -34,7 +34,7 @@ export const fetchData = async (type) => {
     const token = localStorage.getItem('token');
 
     const res = await fetch(
-      `https://ourway.smartclick.agency/wp-json/wp/v2/${type}?_fields=title,id,slug,date,content,type&per_page=100`,
+      `https://dash-ourway.smartclick.agency/wp-json/wp/v2/${type}?_fields=title,id,slug,date,content,type&per_page=100`,
       {
         method: 'GET',
         headers: {
