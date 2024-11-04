@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ArticlesContext } from '../store/articles';
 
 import Header from '../components/Header';
 
 import logoutIcon from '../assets/logout-icon.svg';
+import backIcon from '../assets/back-icon.svg';
 import Article from '../components/Article';
 
 const Root = () => {
@@ -12,6 +13,7 @@ const Root = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -21,6 +23,12 @@ const Root = () => {
   return (
     <>
       <Header handleSearch={setSearchTerm} />
+
+      {location.pathname !== '/' && (
+        <button className="back-icon" onClick={() => navigate(-1)}>
+          <img src={backIcon} alt="Back Icon" />
+        </button>
+      )}
 
       <main>
         <div className="container">

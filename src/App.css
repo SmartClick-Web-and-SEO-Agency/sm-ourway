@@ -218,3 +218,10 @@ h6,
   bottom: 24px;
   right: 24px;
 }
+
+.back-icon {
+  cursor: pointer;
+  position: fixed;
+  top: 24px;
+  left: 24px;
+}
