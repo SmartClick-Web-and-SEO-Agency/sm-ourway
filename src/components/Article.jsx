@@ -14,8 +14,11 @@ const Article = ({ item, handleClick }) => {
                 `;
 
   if (item.type === 'howto') item.type = 'training/how-to-processes';
+  if (item.type === 'projects') item.type = 'training/projects';
   if (item.type === 'organisation')
     item.type = 'training/organisation-and-management-guidelines';
+
+  console.log(item.type);
 
   return (
     <article className={classes.article} onClick={handleClick}>

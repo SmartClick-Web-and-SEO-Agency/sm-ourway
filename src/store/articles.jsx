@@ -8,6 +8,7 @@ const initialState = {
   tools: [],
   howto: [],
   organisation: [],
+  projects: [],
 };
 
 export const ArticlesContext = createContext({
@@ -36,6 +37,11 @@ export default function ArticlesContextProvider({ children }) {
   const { data: organisationData } = useQuery({
     queryKey: ['articles', 'organisation'],
     queryFn: () => fetchData('organisation'),
+    enabled: !!token,
+  });
+  const { data: projectsData } = useQuery({
+    queryKey: ['articles', 'projects'],
+    queryFn: () => fetchData('projects'),
     enabled: !!token,
   });
 
@@ -69,20 +75,29 @@ export default function ArticlesContextProvider({ children }) {
           )
       );
 
+      const filteredProjects = projectsData.filter(
+        (item) =>
+          !item.content.rendered.includes(
+            'Sorry, but you do not have permission to view this content.'
+          )
+      );
+
       setState({
         company: filteredCompany,
         tools: filteredTools,
         howto: filteredHowto,
         organisation: filteredOrganisation,
+        projects: filteredProjects,
         all: [
           ...filteredCompany,
           ...filteredTools,
           ...filteredHowto,
           ...filteredOrganisation,
+          ...filteredProjects,
         ],
       });
     }
-  }, [companyData, toolsData, howtoData, organisationData]);
+  }, [companyData, toolsData, howtoData, organisationData, projectsData]);
 
   return (
     <ArticlesContext.Provider value={state}>

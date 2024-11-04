@@ -120,6 +120,27 @@ const router = createBrowserRouter([
               },
             ],
           },
+          {
+            path: 'projects',
+            children: [
+              {
+                index: true,
+                element: (
+                  <ProtectedRoute>
+                    <Posts type="projects" />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: ':id',
+                element: (
+                  <ProtectedRoute>
+                    <Post />
+                  </ProtectedRoute>
+                ),
+              },
+            ],
+          },
         ],
       },
     ],

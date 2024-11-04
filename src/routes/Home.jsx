@@ -10,7 +10,8 @@ import trainingIcon from '../assets/training-icon.svg';
 import classes from '../css/Home.module.css';
 
 const Home = () => {
-  const { company, tools, howto, organisation } = useContext(ArticlesContext);
+  const { company, tools, howto, organisation, projects } =
+    useContext(ArticlesContext);
 
   return (
     <>
@@ -29,7 +30,7 @@ const Home = () => {
         />
         <Card
           title="Training"
-          postsNumber={howto.length + organisation.length}
+          postsNumber={howto.length + organisation.length + projects.length}
           icon={trainingIcon}
           href="training"
         />
