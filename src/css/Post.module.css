@@ -123,3 +123,7 @@
   width: 100%;
   overflow-x: auto;
 }
+
+.singlePost pre {
+  overflow-x: auto;
+}
