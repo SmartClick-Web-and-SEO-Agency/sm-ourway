@@ -84,6 +84,14 @@
   margin-block: 0 16px;
 }
 
+.singlePost ul {
+  list-style: circle;
+}
+
+.singlePost ol {
+  list-style: decimal;
+}
+
 .singlePost ul,
 .singlePost ol {
   margin-block: 24px;
