@@ -8,7 +8,7 @@ const Posts = ({ type }) => {
 
   return (
     <>
-      {data.map((item) => (
+      {[...data].reverse().map((item) => (
         <Article item={item} key={item.id} />
       ))}
     </>
