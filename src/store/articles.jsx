@@ -1,14 +1,15 @@
 import { createContext, useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchData } from '../utils/http';
+import { fetchData, fetchTools } from '../utils/http';
 
 const initialState = {
   all: [],
   company: [],
-  tools: [],
+  toolGuides: [],
   howto: [],
   organisation: [],
   projects: [],
+  internalTools: [],
 };
 
 export const ArticlesContext = createContext({
@@ -19,6 +20,11 @@ export default function ArticlesContextProvider({ children }) {
   const [state, setState] = useState(initialState);
   let token = localStorage.getItem('token');
 
+  const { data: internalTools } = useQuery({
+    queryKey: ['articles', 'internalTools'],
+    queryFn: () => fetchTools(),
+    enabled: !!token,
+  });
   const { data: companyData } = useQuery({
     queryKey: ['articles', 'company'],
     queryFn: () => fetchData('company'),
@@ -46,62 +52,45 @@ export default function ArticlesContextProvider({ children }) {
   });
 
   useEffect(() => {
-    if (companyData && toolsData && howtoData && organisationData) {
+    if (companyData && toolsData && howtoData && organisationData && internalTools.tools_settings) {
       const filteredCompany = companyData.filter(
-        (item) =>
-          !item.content.rendered.includes(
-            'Sorry, but you do not have permission to view this content.'
-          )
+        (item) => !item.content.rendered.includes('Sorry, but you do not have permission to view this content.'),
       );
 
       const filteredTools = toolsData.filter(
-        (item) =>
-          !item.content.rendered.includes(
-            'Sorry, but you do not have permission to view this content.'
-          )
+        (item) => !item.content.rendered.includes('Sorry, but you do not have permission to view this content.'),
       );
 
       const filteredHowto = howtoData.filter(
-        (item) =>
-          !item.content.rendered.includes(
-            'Sorry, but you do not have permission to view this content.'
-          )
+        (item) => !item.content.rendered.includes('Sorry, but you do not have permission to view this content.'),
       );
 
       const filteredOrganisation = organisationData.filter(
-        (item) =>
-          !item.content.rendered.includes(
-            'Sorry, but you do not have permission to view this content.'
-          )
+        (item) => !item.content.rendered.includes('Sorry, but you do not have permission to view this content.'),
       );
 
       const filteredProjects = projectsData.filter(
-        (item) =>
-          !item.content.rendered.includes(
-            'Sorry, but you do not have permission to view this content.'
-          )
+        (item) => !item.content.rendered.includes('Sorry, but you do not have permission to view this content.'),
       );
 
       setState({
         company: filteredCompany,
-        tools: filteredTools,
+        toolGuides: filteredTools,
         howto: filteredHowto,
         organisation: filteredOrganisation,
         projects: filteredProjects,
+        internalTools: internalTools.tools_settings,
         all: [
           ...filteredCompany,
           ...filteredTools,
           ...filteredHowto,
           ...filteredOrganisation,
           ...filteredProjects,
+          internalTools.tools_settings,
         ],
       });
     }
-  }, [companyData, toolsData, howtoData, organisationData, projectsData]);
+  }, [companyData, toolsData, howtoData, organisationData, projectsData, internalTools]);
 
-  return (
-    <ArticlesContext.Provider value={state}>
-      {children}
-    </ArticlesContext.Provider>
-  );
+  return <ArticlesContext.Provider value={state}>{children}</ArticlesContext.Provider>;
 }

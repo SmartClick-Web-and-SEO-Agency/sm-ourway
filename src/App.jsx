@@ -47,13 +47,13 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'tools',
+        path: 'tool-guides',
         children: [
           {
             index: true,
             element: (
               <ProtectedRoute>
-                <Posts type="tools" />
+                <Posts type="toolGuides" />
               </ProtectedRoute>
             ),
           },
@@ -66,6 +66,14 @@ const router = createBrowserRouter([
             ),
           },
         ],
+      },
+      {
+        path: 'tools',
+        element: (
+          <ProtectedRoute>
+            <Posts type="internalTools" />
+          </ProtectedRoute>
+        ),
       },
       {
         path: 'training',

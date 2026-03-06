@@ -1,18 +1,15 @@
 export const fetchToken = async (username, password) => {
   try {
-    const res = await fetch(
-      'https://dash-ourway.smartclick.agency/wp-json/jwt-auth/v1/token',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          username,
-          password,
-        }),
-      }
-    );
+    const res = await fetch('https://dash-ourway.smartclick.agency/wp-json/jwt-auth/v1/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        username,
+        password,
+      }),
+    });
     const resData = await res.json();
 
     const { token } = resData;
@@ -55,8 +52,27 @@ export const fetchData = async (type) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
+
+    const resData = await res.json();
+
+    return resData;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const fetchTools = async () => {
+  try {
+    const token = getToken();
+
+    const res = await fetch(`https://dash-ourway.smartclick.agency/wp-json/custom/v1/options`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const resData = await res.json();
 

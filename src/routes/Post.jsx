@@ -10,15 +10,14 @@ const Post = () => {
   const [post, setPost] = useState();
 
   const location = useLocation();
-  const match = location.pathname.match(
-    /\/([a-zA-Z-]+)\/[a-zA-Z0-9-]+-(\d{3,4})$/
-  );
+  const match = location.pathname.match(/\/([a-zA-Z-]+)\/[a-zA-Z0-9-]+-(\d{3,4})$/);
   const categoryMatch = match ? match[1] : null;
   const id = match ? match[2] : null;
 
   const categoryMap = {
     'how-to-processes': 'howto',
     'organisation-and-management-guidelines': 'organisation',
+    'tool-guides': 'toolGuides',
   };
 
   const cat = categoryMap[categoryMatch] || categoryMatch;
@@ -36,10 +35,7 @@ const Post = () => {
     <div className={classes.postContainer}>
       {post ? (
         <>
-          <div
-            className={classes.singlePost}
-            dangerouslySetInnerHTML={{ __html: post.content?.rendered }}
-          ></div>
+          <div className={classes.singlePost} dangerouslySetInnerHTML={{ __html: post.content?.rendered }}></div>
           <TableOfContents />
         </>
       ) : (
